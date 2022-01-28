@@ -1706,7 +1706,7 @@ var modal = function modal() {
           return window.style.display = 'none';
         });
         modalWindow.style.display = 'block';
-        document.body.style.overflow = 'hidden'; ///clearInterval(() => showModalByTime);
+        document.body.style.overflow = 'hidden';
       });
     });
     modalWindow.addEventListener('click', function (e) {

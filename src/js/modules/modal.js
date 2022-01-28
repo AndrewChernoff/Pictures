@@ -15,7 +15,6 @@ const modal = () => {
 
                 modalWindow.style.display = 'block';
                 document.body.style.overflow = 'hidden';
-                ///clearInterval(() => showModalByTime);
             });
         })
 
