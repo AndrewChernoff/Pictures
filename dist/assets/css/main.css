@@ -31,6 +31,17 @@
   box-sizing: border-box;
   outline: none;
 }
+
+@keyframes fade {
+  from {opacity: 0.5;}
+  to {opacity: 1;}
+}
+
+.faded {
+  animation-name: fade;
+  animation-duration: 0.2s;
+}
+
 html {
   font-size: 10px;
 }
