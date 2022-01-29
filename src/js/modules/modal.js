@@ -63,10 +63,12 @@ const modal = () => {
         let documentHeight = document.body.scrollHeight;
         let currentScroll = window.scrollY + window.innerHeight;
 
+        let scrollHeight = Math.ceil(documentHeight, currentScroll);
         let modifier = 200;
         if (currentScroll + modifier > documentHeight && !popedUp) {
             //console.log('You are at the bottom!')
             document.querySelector('.popup-consultation').style.display = 'block';
+            document.body.style.overflow = 'hidden';
             popedUp = true;
         }
     })
@@ -90,7 +92,7 @@ const modal = () => {
         }, 7000)
     }
 
-    showModalByTime('.popup-consultation');
+    //showModalByTime('.popup-consultation');
 }
 
 export default modal;

@@ -39,7 +39,7 @@
 
 .faded {
   animation-name: fade;
-  animation-duration: 0.2s;
+  animation-duration: 0.5s;
 }
 
 html {
