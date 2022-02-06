@@ -34,7 +34,7 @@ const modal = () => {
 
                 popedUp = true;////////////////
 
-                windows.forEach(window => window.style.display = 'none');
+                //windows.forEach(window => window.style.display = 'none');
 
                 modalWindow.style.display = 'block';
                 document.body.style.marginRight = `${getScrollbarWidth()}px`;
