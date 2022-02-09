@@ -21,6 +21,7 @@ const modal = () => {
         const trigger = document.querySelectorAll(triggerSelector);
         const modalWindow = document.querySelector(modalSelector);
         const windows = document.querySelectorAll('[data-modal]');
+        const forms = document.querySelectorAll('form');
 
         windows.forEach(el => {
             el.classList.add('faded');
@@ -51,6 +52,7 @@ const modal = () => {
                 modalWindow.style.display = 'none';
                 document.body.style.overflow = '';
                 document.body.style.marginRight = '0px';
+                forms.forEach(form => form.reset());
             }
         })
     }
