@@ -4335,21 +4335,24 @@ module.exports = g;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
 /* harmony import */ var _modules_inputLangText__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/inputLangText */ "./src/js/modules/inputLangText.js");
-/* harmony import */ var _modules_mask__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/mask */ "./src/js/modules/mask.js");
-/* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/modal */ "./src/js/modules/modal.js");
-/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
+/* harmony import */ var _modules_loadMore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/loadMore */ "./src/js/modules/loadMore.js");
+/* harmony import */ var _modules_mask__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/mask */ "./src/js/modules/mask.js");
+/* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/modal */ "./src/js/modules/modal.js");
+/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
 
 
 
 
 
-Object(_modules_modal__WEBPACK_IMPORTED_MODULE_3__["default"])();
-Object(_modules_slider__WEBPACK_IMPORTED_MODULE_4__["default"])('.feedback-slider-item', 'horizontal', '.main-prev-btn', '.main-next-btn');
-Object(_modules_slider__WEBPACK_IMPORTED_MODULE_4__["default"])('.main-slider-item', 'vertical');
+
+Object(_modules_modal__WEBPACK_IMPORTED_MODULE_4__["default"])();
+Object(_modules_slider__WEBPACK_IMPORTED_MODULE_5__["default"])('.feedback-slider-item', 'horizontal', '.main-prev-btn', '.main-next-btn');
+Object(_modules_slider__WEBPACK_IMPORTED_MODULE_5__["default"])('.main-slider-item', 'vertical');
 Object(_modules_forms__WEBPACK_IMPORTED_MODULE_0__["default"])();
-Object(_modules_mask__WEBPACK_IMPORTED_MODULE_2__["default"])('[name="phone"]');
+Object(_modules_mask__WEBPACK_IMPORTED_MODULE_3__["default"])('[name="phone"]');
 Object(_modules_inputLangText__WEBPACK_IMPORTED_MODULE_1__["default"])('[name="name"]');
 Object(_modules_inputLangText__WEBPACK_IMPORTED_MODULE_1__["default"])('[name="message"]');
+Object(_modules_loadMore__WEBPACK_IMPORTED_MODULE_2__["default"])('.button-styles', '.styles-2');
 
 /***/ }),
 
@@ -4569,6 +4572,37 @@ var inputLangText = function inputLangText(selector) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (inputLangText);
+
+/***/ }),
+
+/***/ "./src/js/modules/loadMore.js":
+/*!************************************!*\
+  !*** ./src/js/modules/loadMore.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var loadMore = function loadMore(button, styles) {
+  var trigger = document.querySelector(button);
+  var styleCards = document.querySelectorAll(styles);
+  console.log(styleCards[0] + '5');
+  trigger.addEventListener('click', function () {
+    styleCards.forEach(function (el) {
+      el.classList.remove('hidden-lg', 'hidden-md', 'hidden-sm', 'hidden-xs');
+      el.classList.add('animated', 'zoomInUp', 'col-sm-3', 'col-sm-offset-0', 'col-xs-10', 'col-xs-offset-1');
+      console.log(el);
+    });
+    trigger.remove();
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (loadMore);
 
 /***/ }),
 

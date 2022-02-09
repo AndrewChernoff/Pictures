@@ -1,5 +1,6 @@
 import forms from "./modules/forms";
 import inputLangText from "./modules/inputLangText";
+import loadMore from "./modules/loadMore";
 import mask from "./modules/mask";
 import modal from "./modules/modal";
 import slider from "./modules/slider";
@@ -11,3 +12,4 @@ forms();
 mask('[name="phone"]');
 inputLangText('[name="name"]');
 inputLangText('[name="message"]');
+loadMore('.button-styles', '.styles-2');
