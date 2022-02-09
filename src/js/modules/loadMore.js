@@ -1,19 +1,31 @@
 const loadMore = (button, styles) => {
+    const row = document.querySelector(styles);
     const trigger = document.querySelector(button);
-    const styleCards = document.querySelectorAll(styles);
 
-    console.log(styleCards[0] + '5')
+    function getStyles() {
+        fetch('assets/db.json')
+            .then(response => response.json())
+            .then(data => {
+                data.styles.forEach(({ src, title, link }) => {
+                    row.innerHTML += `
+            <div class="animated zoomInUp col-sm-3 col-sm-offset-0 col-xs-10 col-xs-offset-1">
+                    <div class=styles-block>
+                        <img src=${src} alt>
+                        <h4>${title}</h4>
+                        <a href="${link}">Подробнее</a>
+                    </div>
+                </div>
+            `;
+                })
+            });
+    }
 
     trigger.addEventListener('click', () => {
-        styleCards.forEach(el => {
-            el.classList.remove('hidden-lg', 'hidden-md', 'hidden-sm', 'hidden-xs');
-            el.classList.add('animated', 'zoomInUp', 'col-sm-3', 'col-sm-offset-0', 'col-xs-10', 'col-xs-offset-1');
-            console.log(el)
-        });
-
+        getStyles();
         trigger.remove();
-    })
-
+    });
 }
+
+///finish loading by refactoring query in DAL
 
 export default loadMore;

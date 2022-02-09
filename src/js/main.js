@@ -12,4 +12,5 @@ forms();
 mask('[name="phone"]');
 inputLangText('[name="name"]');
 inputLangText('[name="message"]');
-loadMore('.button-styles', '.styles-2');
+//loadMore('.button-styles', '.styles-2');
+loadMore('.button-styles', '.styles .row');
