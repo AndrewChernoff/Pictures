@@ -4401,27 +4401,29 @@ module.exports = g;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
-/* harmony import */ var _modules_inputLangText__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/inputLangText */ "./src/js/modules/inputLangText.js");
-/* harmony import */ var _modules_loadMore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/loadMore */ "./src/js/modules/loadMore.js");
-/* harmony import */ var _modules_mask__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/mask */ "./src/js/modules/mask.js");
-/* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/modal */ "./src/js/modules/modal.js");
-/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
+/* harmony import */ var _modules_calc__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/calc */ "./src/js/modules/calc.js");
+/* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
+/* harmony import */ var _modules_inputLangText__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/inputLangText */ "./src/js/modules/inputLangText.js");
+/* harmony import */ var _modules_loadMore__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/loadMore */ "./src/js/modules/loadMore.js");
+/* harmony import */ var _modules_mask__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/mask */ "./src/js/modules/mask.js");
+/* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/modal */ "./src/js/modules/modal.js");
+/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
 
 
 
 
 
 
-Object(_modules_modal__WEBPACK_IMPORTED_MODULE_4__["default"])();
-Object(_modules_slider__WEBPACK_IMPORTED_MODULE_5__["default"])('.feedback-slider-item', 'horizontal', '.main-prev-btn', '.main-next-btn');
-Object(_modules_slider__WEBPACK_IMPORTED_MODULE_5__["default"])('.main-slider-item', 'vertical');
-Object(_modules_forms__WEBPACK_IMPORTED_MODULE_0__["default"])();
-Object(_modules_mask__WEBPACK_IMPORTED_MODULE_3__["default"])('[name="phone"]');
-Object(_modules_inputLangText__WEBPACK_IMPORTED_MODULE_1__["default"])('[name="name"]');
-Object(_modules_inputLangText__WEBPACK_IMPORTED_MODULE_1__["default"])('[name="message"]'); //loadMore('.button-styles', '.styles-2');
 
-Object(_modules_loadMore__WEBPACK_IMPORTED_MODULE_2__["default"])('.button-styles', '.styles .row');
+Object(_modules_modal__WEBPACK_IMPORTED_MODULE_5__["default"])();
+Object(_modules_slider__WEBPACK_IMPORTED_MODULE_6__["default"])('.feedback-slider-item', 'horizontal', '.main-prev-btn', '.main-next-btn');
+Object(_modules_slider__WEBPACK_IMPORTED_MODULE_6__["default"])('.main-slider-item', 'vertical');
+Object(_modules_forms__WEBPACK_IMPORTED_MODULE_1__["default"])();
+Object(_modules_mask__WEBPACK_IMPORTED_MODULE_4__["default"])('[name="phone"]');
+Object(_modules_inputLangText__WEBPACK_IMPORTED_MODULE_2__["default"])('[name="name"]');
+Object(_modules_inputLangText__WEBPACK_IMPORTED_MODULE_2__["default"])('[name="message"]');
+Object(_modules_loadMore__WEBPACK_IMPORTED_MODULE_3__["default"])('.button-styles', '.styles .row');
+Object(_modules_calc__WEBPACK_IMPORTED_MODULE_0__["default"])();
 
 /***/ }),
 
@@ -4472,6 +4474,79 @@ var postData = function postData(url, obj) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (postData);
+
+/***/ }),
+
+/***/ "./src/js/modules/calc.js":
+/*!********************************!*\
+  !*** ./src/js/modules/calc.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var calc = function calc() {
+  var size;
+  var material;
+  var options = 0;
+  var promocode = document.querySelector('.promocode');
+  var calcPrice = document.querySelector('.calc-price');
+  var result;
+  var isGotCode = false;
+
+  function calculate(listener, selector) {
+    var param = document.querySelector(selector);
+    param.addEventListener(listener, function (e) {
+      if (selector === '#size') {
+        var pictureParam = e.target.options[e.target.selectedIndex].dataset.price;
+        console.log(pictureParam);
+        size = +pictureParam;
+      } else if (selector === '#material') {
+        var _pictureParam = e.target.options[e.target.selectedIndex].dataset.price;
+        console.log(_pictureParam);
+        material = +_pictureParam;
+      } else if (selector === '#options') {
+        var _pictureParam2 = e.target.options[e.target.selectedIndex].dataset.price;
+        console.log(_pictureParam2);
+        options = +_pictureParam2;
+
+        if (e.target.selectedIndex === 0) {
+          options = 0;
+        }
+      } else if (selector === '.promocode') {
+        if (promocode.value == 'IWANTPOPART') {
+          isGotCode = true;
+        } else {
+          isGotCode = false;
+        }
+      }
+
+      var sum = size + material + options;
+      result = sum;
+      console.log(result);
+
+      if (isGotCode) {
+        result = sum - sum * .30;
+        console.log(promocode.value);
+        console.log(result);
+      }
+
+      if (!size || !material) {
+        calcPrice.textContent = "\n                \u0414\u043B\u044F \u0440\u0430\u0441\u0447\u0435\u0442\u0430 \u043D\u0443\u0436\u043D\u043E \u0432\u044B\u0431\u0440\u0430\u0442\u044C \u0440\u0430\u0437\u043C\u0435\u0440 \u043A\u0430\u0440\u0442\u0438\u043D\u044B \u0438 \u043C\u0430\u0442\u0435\u0440\u0438\u0430\u043B \u043A\u0430\u0440\u0442\u0438\u043D\u044B\n                ";
+      } else {
+        calcPrice.textContent = result;
+      }
+    });
+  }
+
+  calculate('change', '#size');
+  calculate('change', '#material');
+  calculate('change', '#options');
+  calculate('input', '.promocode');
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (calc);
 
 /***/ }),
 

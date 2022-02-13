@@ -1,3 +1,4 @@
+import calc from "./modules/calc";
 import forms from "./modules/forms";
 import inputLangText from "./modules/inputLangText";
 import loadMore from "./modules/loadMore";
@@ -12,5 +13,5 @@ forms();
 mask('[name="phone"]');
 inputLangText('[name="name"]');
 inputLangText('[name="message"]');
-//loadMore('.button-styles', '.styles-2');
 loadMore('.button-styles', '.styles .row');
+calc();
