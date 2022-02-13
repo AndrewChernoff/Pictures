@@ -4425,6 +4425,56 @@ Object(_modules_loadMore__WEBPACK_IMPORTED_MODULE_2__["default"])('.button-style
 
 /***/ }),
 
+/***/ "./src/js/modules/DAL.js":
+/*!*******************************!*\
+  !*** ./src/js/modules/DAL.js ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.promise */ "./node_modules/core-js/modules/es.promise.js");
+/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+
+var postData = function postData(url, obj) {
+  var response;
+  return regeneratorRuntime.async(function postData$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          _context.next = 2;
+          return regeneratorRuntime.awrap(fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(obj)
+          }));
+
+        case 2:
+          response = _context.sent;
+          return _context.abrupt("return", response.text());
+
+        case 4:
+        case "end":
+          return _context.stop();
+      }
+    }
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (postData);
+
+/***/ }),
+
 /***/ "./src/js/modules/forms.js":
 /*!*********************************!*\
   !*** ./src/js/modules/forms.js ***!
@@ -4450,8 +4500,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _DAL__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./DAL */ "./src/js/modules/DAL.js");
 
 
 
@@ -4462,10 +4511,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-//import loadingGIF from '../../assets/img/spinner.gif'
 var forms = function forms() {
   var form = document.querySelectorAll('form');
-  var inputs = document.querySelectorAll('input');
   var modal = document.querySelectorAll('[data-modal]');
   var uploadInput = document.querySelectorAll('[name="upload"]');
   uploadInput.forEach(function (el) {
@@ -4495,36 +4542,6 @@ var forms = function forms() {
       return el.style.display = 'none';
     });
   }
-
-  console.log(form);
-  console.log(inputs);
-
-  var postData = function postData(url, obj) {
-    var response;
-    return regeneratorRuntime.async(function postData$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            _context.next = 2;
-            return regeneratorRuntime.awrap(fetch(url, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(obj)
-            }));
-
-          case 2:
-            response = _context.sent;
-            return _context.abrupt("return", response.text());
-
-          case 4:
-          case "end":
-            return _context.stop();
-        }
-      }
-    });
-  };
 
   var sendFormData = function sendFormData(formEl) {
     formEl.addEventListener('submit', function (e) {
@@ -4565,7 +4582,7 @@ var forms = function forms() {
       }
 
       formEl.parentNode.appendChild(formStatus);
-      postData(serverPath, obj).then(function (response) {
+      Object(_DAL__WEBPACK_IMPORTED_MODULE_8__["default"])(serverPath, obj).then(function (response) {
         console.log(response);
         console.log(obj);
         console.log(serverPath);
@@ -4578,7 +4595,7 @@ var forms = function forms() {
           formEl.style.display = 'block';
           document.body.style.overflow = '';
           document.body.style.marginRight = '0px';
-        }, 4000); //formStatus.remove(); ///something wrong in html and css
+        }, 4000);
       }).catch(function () {
         formStatus.textContent = message.failure;
         setTimeout(function () {
@@ -4586,10 +4603,8 @@ var forms = function forms() {
         }, 5000);
         document.body.style.overflow = '';
       }).finally(function () {
-        formEl.reset(); ///
-
-        clearUploadInput(); ////
-
+        formEl.reset();
+        clearUploadInput();
         console.log(formStatus);
         formEl.classList.add('animated', 'slideInUp');
         setTimeout(function () {

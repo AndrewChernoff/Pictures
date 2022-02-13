@@ -1,8 +1,7 @@
-//import loadingGIF from '../../assets/img/spinner.gif'
+import postData from "./DAL";
 
 const forms = () => {
     let form = document.querySelectorAll('form');
-    let inputs = document.querySelectorAll('input');
     let modal = document.querySelectorAll('[data-modal]');
     let uploadInput = document.querySelectorAll('[name="upload"]');
 
@@ -28,20 +27,6 @@ const forms = () => {
 
     function closeModal() {
         modal.forEach(el => el.style.display = 'none');
-    }
-
-    console.log(form);
-    console.log(inputs);
-
-    const postData = async (url, obj) => {
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(obj)
-        });
-        return response.text();
     }
 
     let sendFormData = (formEl) => {
@@ -110,14 +95,13 @@ const forms = () => {
                         document.body.style.overflow = '';
                         document.body.style.marginRight = '0px';
                     }, 4000);
-                    //formStatus.remove(); ///something wrong in html and css
                 }).catch(() => {
                     formStatus.textContent = message.failure;
                     setTimeout(() => formStatus.remove(), 5000);
                     document.body.style.overflow = '';
                 }).finally(() => {
-                    formEl.reset();///
-                    clearUploadInput();////
+                    formEl.reset();
+                    clearUploadInput();
                     console.log(formStatus);
 
                     formEl.classList.add('animated', 'slideInUp');
@@ -131,7 +115,6 @@ const forms = () => {
     }
 
     form.forEach(el => sendFormData(el));
-
 }
 
 
