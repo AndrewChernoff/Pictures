@@ -4415,15 +4415,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var state = {};
 Object(_modules_modal__WEBPACK_IMPORTED_MODULE_5__["default"])();
 Object(_modules_slider__WEBPACK_IMPORTED_MODULE_6__["default"])('.feedback-slider-item', 'horizontal', '.main-prev-btn', '.main-next-btn');
 Object(_modules_slider__WEBPACK_IMPORTED_MODULE_6__["default"])('.main-slider-item', 'vertical');
-Object(_modules_forms__WEBPACK_IMPORTED_MODULE_1__["default"])();
+Object(_modules_forms__WEBPACK_IMPORTED_MODULE_1__["default"])(state);
 Object(_modules_mask__WEBPACK_IMPORTED_MODULE_4__["default"])('[name="phone"]');
 Object(_modules_inputLangText__WEBPACK_IMPORTED_MODULE_2__["default"])('[name="name"]');
 Object(_modules_inputLangText__WEBPACK_IMPORTED_MODULE_2__["default"])('[name="message"]');
 Object(_modules_loadMore__WEBPACK_IMPORTED_MODULE_3__["default"])('.button-styles', '.styles .row');
-Object(_modules_calc__WEBPACK_IMPORTED_MODULE_0__["default"])();
+Object(_modules_calc__WEBPACK_IMPORTED_MODULE_0__["default"])(state);
 
 /***/ }),
 
@@ -4486,14 +4487,16 @@ var postData = function postData(url, obj) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var calc = function calc() {
+var calc = function calc(store) {
   var size;
   var material;
   var options = 0;
   var promocode = document.querySelector('.promocode');
   var calcPrice = document.querySelector('.calc-price');
   var result;
-  var isGotCode = false;
+  var isCodeGot = false;
+  var btn = document.querySelector('.calc-button');
+  btn.disabled = true;
 
   function calculate(listener, selector) {
     var param = document.querySelector(selector);
@@ -4502,10 +4505,12 @@ var calc = function calc() {
         var pictureParam = e.target.options[e.target.selectedIndex].dataset.price;
         console.log(pictureParam);
         size = +pictureParam;
+        store.sizePrice = pictureParam;
       } else if (selector === '#material') {
         var _pictureParam = e.target.options[e.target.selectedIndex].dataset.price;
         console.log(_pictureParam);
         material = +_pictureParam;
+        store.materialPrice = _pictureParam;
       } else if (selector === '#options') {
         var _pictureParam2 = e.target.options[e.target.selectedIndex].dataset.price;
         console.log(_pictureParam2);
@@ -4514,11 +4519,24 @@ var calc = function calc() {
         if (e.target.selectedIndex === 0) {
           options = 0;
         }
+
+        storePrice.options = _pictureParam2;
+      } else if (selector === 'input[name="upload"]') {
+        ///
+        var _pictureParam3 = e.target.options[e.target.selectedIndex].dataset.price;
+        console.log(_pictureParam3);
+        options = +_pictureParam3;
+
+        if (e.target.selectedIndex === 0) {
+          options = 0;
+        }
+
+        storePrice.image = _pictureParam3;
       } else if (selector === '.promocode') {
         if (promocode.value == 'IWANTPOPART') {
-          isGotCode = true;
+          isCodeGot = true;
         } else {
-          isGotCode = false;
+          isCodeGot = false;
         }
       }
 
@@ -4526,7 +4544,7 @@ var calc = function calc() {
       result = sum;
       console.log(result);
 
-      if (isGotCode) {
+      if (isCodeGot) {
         result = sum - sum * .30;
         console.log(promocode.value);
         console.log(result);
@@ -4534,9 +4552,13 @@ var calc = function calc() {
 
       if (!size || !material) {
         calcPrice.textContent = "\n                \u0414\u043B\u044F \u0440\u0430\u0441\u0447\u0435\u0442\u0430 \u043D\u0443\u0436\u043D\u043E \u0432\u044B\u0431\u0440\u0430\u0442\u044C \u0440\u0430\u0437\u043C\u0435\u0440 \u043A\u0430\u0440\u0442\u0438\u043D\u044B \u0438 \u043C\u0430\u0442\u0435\u0440\u0438\u0430\u043B \u043A\u0430\u0440\u0442\u0438\u043D\u044B\n                ";
-      } else {
+        btn.disabled = true; ////
+      } else if (size || material) {
         calcPrice.textContent = result;
+        btn.disabled = false; ////
       }
+
+      console.log(store);
     });
   }
 
@@ -4544,6 +4566,7 @@ var calc = function calc() {
   calculate('change', '#material');
   calculate('change', '#options');
   calculate('input', '.promocode');
+  calculate('input', 'input[name="upload"]');
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (calc);
@@ -4586,7 +4609,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var forms = function forms() {
+var forms = function forms(store) {
   var form = document.querySelectorAll('form');
   var modal = document.querySelectorAll('[data-modal]');
   var uploadInput = document.querySelectorAll('[name="upload"]');
@@ -4599,10 +4622,7 @@ var forms = function forms() {
         array.value = array[0].slice(0, 6) + '...' + array[1];
       }
 
-      console.log(array.value);
       el.previousSibling.previousSibling.textContent = array.value;
-      console.log(el.previousSibling.previousSibling);
-      console.log(el.nextSibling);
     });
   });
 
@@ -4623,6 +4643,14 @@ var forms = function forms() {
       e.preventDefault();
       var formData = new FormData(formEl);
       var obj = {};
+      var calc = formEl.getAttribute('data-calc');
+
+      if (calc === 'end') {
+        for (var key in store) {
+          formData.append(key, store[key]);
+        }
+      }
+
       formData.forEach(function (value, key) {
         obj[key] = value;
       });
@@ -4644,6 +4672,8 @@ var forms = function forms() {
         /// if statements for server path
         serverPath = server.design;
       } else if (formEl.closest('.popup-consultation')) {
+        serverPath = server.question;
+      } else if (formEl.closest('.calc')) {
         serverPath = server.question;
       }
 
@@ -4680,7 +4710,6 @@ var forms = function forms() {
       }).finally(function () {
         formEl.reset();
         clearUploadInput();
-        console.log(formStatus);
         formEl.classList.add('animated', 'slideInUp');
         setTimeout(function () {
           formEl.classList.remove('animated', 'slideInUp');

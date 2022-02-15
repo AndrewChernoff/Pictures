@@ -1,6 +1,6 @@
 import postData from "./DAL";
 
-const forms = () => {
+const forms = (store) => {
     let form = document.querySelectorAll('form');
     let modal = document.querySelectorAll('[data-modal]');
     let uploadInput = document.querySelectorAll('[name="upload"]');
@@ -12,10 +12,7 @@ const forms = () => {
             if (array[0].length > 6) {
                 array.value = array[0].slice(0, 6) + '...' + array[1];
             }
-            console.log(array.value);
             el.previousSibling.previousSibling.textContent = array.value;
-            console.log(el.previousSibling.previousSibling);
-            console.log(el.nextSibling);
         })
     })
 
@@ -37,11 +34,20 @@ const forms = () => {
 
             let obj = {};
 
+            let calc = formEl.getAttribute('data-calc');
+            if (calc === 'end') {
+                for (let key in store) {
+                    formData.append(key, store[key])
+                }
+            }
+
             formData.forEach((value, key) => {
                 obj[key] = value;
             })
 
-            console.log(obj)
+            console.log(obj);
+
+
 
             const message = {
                 success: 'Скоро с вами свяжемся!',
@@ -61,6 +67,8 @@ const forms = () => {
             if (formEl.closest('.popup-design')) {/// if statements for server path
                 serverPath = server.design;
             } else if (formEl.closest('.popup-consultation')) {
+                serverPath = server.question;
+            } else if (formEl.closest('.calc')) {
                 serverPath = server.question;
             }
 
@@ -102,7 +110,6 @@ const forms = () => {
                 }).finally(() => {
                     formEl.reset();
                     clearUploadInput();
-                    console.log(formStatus);
 
                     formEl.classList.add('animated', 'slideInUp');
 
