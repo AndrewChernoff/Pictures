@@ -34,8 +34,7 @@ const forms = (store) => {
 
             let obj = {};
 
-            let calc = formEl.getAttribute('data-calc');
-            if (calc === 'end') {
+            if (formEl.getAttribute('data-calc')) {
                 for (let key in store) {
                     formData.append(key, store[key])
                 }
@@ -46,8 +45,6 @@ const forms = (store) => {
             })
 
             console.log(obj);
-
-
 
             const message = {
                 success: 'Скоро с вами свяжемся!',
@@ -116,7 +113,21 @@ const forms = (store) => {
                     setTimeout(() => {
                         formEl.classList.remove('animated', 'slideInUp');
                     }, 5000);
-                })
+
+                    if (formEl.getAttribute('data-calc')) {
+                        document.querySelector('.calc-button').disabled = true;
+                        document.querySelector('.calc-price').textContent = `
+                        Для расчета нужно выбрать размер картины и материал картины
+                        `;
+                        console.log(store);
+                        //store = {}
+                        for (const prop of Object.getOwnPropertyNames(store)) {
+                            delete store[prop];
+                        }
+                        console.log(store);
+                    }
+                }
+                )
 
         })
     }

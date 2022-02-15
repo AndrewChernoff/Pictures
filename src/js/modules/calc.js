@@ -1,10 +1,6 @@
 const calc = (store) => {
-    let size;
-    let material;
-    let options = 0;
     let promocode = document.querySelector('.promocode');
     let calcPrice = document.querySelector('.calc-price');
-    let result;
     let isCodeGot = false;
     const btn = document.querySelector('.calc-button');
 
@@ -16,56 +12,56 @@ const calc = (store) => {
         param.addEventListener(listener, function (e) {
             if (selector === '#size') {
                 let pictureParam = e.target.options[e.target.selectedIndex].dataset.price;
-                console.log(pictureParam);
-                size = +pictureParam;
-                store.sizePrice = pictureParam;
+                store.sizePrice = +pictureParam;
             } else if (selector === '#material') {
                 let pictureParam = e.target.options[e.target.selectedIndex].dataset.price;
-                console.log(pictureParam);
-                material = +pictureParam;
-                store.materialPrice = pictureParam;
+                store.materialPrice = +pictureParam;
             } else if (selector === '#options') {
                 let pictureParam = e.target.options[e.target.selectedIndex].dataset.price;
-                console.log(pictureParam);
-                options = +pictureParam;
-                if (e.target.selectedIndex === 0) {
-                    options = 0;
+                store.options = +pictureParam;
+                if (!e.target.selectedIndex) {
+                    store.options = 0;
                 }
-                storePrice.options = pictureParam;
-            } else if (selector === 'input[name="upload"]') {///
+            } else if (selector === 'input[name="upload"]') {
                 let pictureParam = e.target.options[e.target.selectedIndex].dataset.price;
                 console.log(pictureParam);
-                options = +pictureParam;
-                if (e.target.selectedIndex === 0) {
-                    options = 0;
-                }
-                storePrice.image = pictureParam;
+                store.image = pictureParam;
             } else if (selector === '.promocode') {
-                if (promocode.value == 'IWANTPOPART') {
+                if (promocode.value == 'IWANTPOPART' || promocode.value == 'IWANTPOPART ') {
                     isCodeGot = true;
+                    store.promocode = isCodeGot;
                 } else {
                     isCodeGot = false;
+                    store.promocode = isCodeGot;
                 }
             }
 
-            let sum = size + material + options;
-            result = sum;
-            console.log(result);
+            store.sum = store.sizePrice + store.materialPrice;
 
-            if (isCodeGot) {
-                result = sum - (sum * .30);
-                console.log(promocode.value);
-                console.log(result);
-            }
-
-            if (!size || !material) {
+            if (!store.sizePrice || !store.materialPrice) {
                 calcPrice.textContent = `
                 Для расчета нужно выбрать размер картины и материал картины
                 `
-                btn.disabled = true;////
-            } else if (size || material) {
-                calcPrice.textContent = result;
-                btn.disabled = false;////
+                btn.disabled = true;
+            } else if (store.sizePrice && store.materialPrice && !store.options) {
+                btn.disabled = false;
+                store.options = 0;
+                calcPrice.textContent = store.sizePrice + store.materialPrice + store.options;
+            } else if (store.sizePrice && store.materialPrice && store.options) {
+                btn.disabled = false;
+                store.sum = store.sizePrice + store.materialPrice + store.options;
+                calcPrice.textContent = store.sum;
+            }
+
+            if (isCodeGot) {
+                store.sum = store.sum - (store.sum * .30);
+                console.log(store.sum);
+                calcPrice.textContent = store.sum;
+                if (store.sum === NaN || !store.materialPrice) {
+                    calcPrice.textContent = `
+                    Для расчета нужно выбрать размер картины и материал картины
+                    `
+                }
             }
 
             console.log(store);
@@ -79,5 +75,6 @@ const calc = (store) => {
     calculate('input', '.promocode');
     calculate('input', 'input[name="upload"]');
 }
+
 
 export default calc;

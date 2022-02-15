@@ -8,6 +8,7 @@ import modal from "./modules/modal";
 import slider from "./modules/slider";
 
 let state = {};
+console.log(state);
 
 modal();
 slider('.feedback-slider-item', 'horizontal', '.main-prev-btn', '.main-next-btn');
