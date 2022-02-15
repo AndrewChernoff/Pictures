@@ -1,4 +1,5 @@
 import calc from "./modules/calc";
+import filterTabs from "./modules/filterTabs";
 import forms from "./modules/forms";
 import inputLangText from "./modules/inputLangText";
 import loadMore from "./modules/loadMore";
@@ -17,3 +18,4 @@ inputLangText('[name="name"]');
 inputLangText('[name="message"]');
 loadMore('.button-styles', '.styles .row');
 calc(state);
+filterTabs('.portfolio-menu li', '.portfolio-block');
