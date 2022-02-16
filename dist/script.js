@@ -5460,7 +5460,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_loadMore__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/loadMore */ "./src/js/modules/loadMore.js");
 /* harmony import */ var _modules_mask__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/mask */ "./src/js/modules/mask.js");
 /* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/modal */ "./src/js/modules/modal.js");
-/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
+/* harmony import */ var _modules_pictures__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/pictures */ "./src/js/modules/pictures.js");
+/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
+
 
 
 
@@ -5472,8 +5474,8 @@ __webpack_require__.r(__webpack_exports__);
 var state = {};
 console.log(state);
 Object(_modules_modal__WEBPACK_IMPORTED_MODULE_6__["default"])();
-Object(_modules_slider__WEBPACK_IMPORTED_MODULE_7__["default"])('.feedback-slider-item', 'horizontal', '.main-prev-btn', '.main-next-btn');
-Object(_modules_slider__WEBPACK_IMPORTED_MODULE_7__["default"])('.main-slider-item', 'vertical');
+Object(_modules_slider__WEBPACK_IMPORTED_MODULE_8__["default"])('.feedback-slider-item', 'horizontal', '.main-prev-btn', '.main-next-btn');
+Object(_modules_slider__WEBPACK_IMPORTED_MODULE_8__["default"])('.main-slider-item', 'vertical');
 Object(_modules_forms__WEBPACK_IMPORTED_MODULE_2__["default"])(state);
 Object(_modules_mask__WEBPACK_IMPORTED_MODULE_5__["default"])('[name="phone"]');
 Object(_modules_inputLangText__WEBPACK_IMPORTED_MODULE_3__["default"])('[name="name"]');
@@ -5481,6 +5483,7 @@ Object(_modules_inputLangText__WEBPACK_IMPORTED_MODULE_3__["default"])('[name="m
 Object(_modules_loadMore__WEBPACK_IMPORTED_MODULE_4__["default"])('.button-styles', '.styles .row');
 Object(_modules_calc__WEBPACK_IMPORTED_MODULE_0__["default"])(state);
 Object(_modules_filterTabs__WEBPACK_IMPORTED_MODULE_1__["default"])('.portfolio-menu li', '.portfolio-block');
+Object(_modules_pictures__WEBPACK_IMPORTED_MODULE_7__["default"])('.sizes-block');
 
 /***/ }),
 
@@ -6167,6 +6170,42 @@ var modal = function modal() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (modal);
+
+/***/ }),
+
+/***/ "./src/js/modules/pictures.js":
+/*!************************************!*\
+  !*** ./src/js/modules/pictures.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var pictures = function pictures(selector) {
+  var pics = document.querySelectorAll(selector);
+  pics.forEach(function (el) {
+    var img = el.firstElementChild;
+    el.addEventListener('mouseenter', function () {
+      el.querySelectorAll('p:not(.sizes-hit)').forEach(function (item) {
+        return item.style.display = 'none';
+      });
+      img.src = el.firstElementChild.src.substring(0, el.firstElementChild.src.length - 4) + '-1.png';
+    });
+    el.addEventListener('mouseleave', function () {
+      el.querySelectorAll('p').forEach(function (item) {
+        return item.style.display = 'block';
+      });
+      img.src = el.firstElementChild.src.substring(0, el.firstElementChild.src.length - 6) + '.png';
+    });
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (pictures);
 
 /***/ }),
 

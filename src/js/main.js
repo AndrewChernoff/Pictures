@@ -5,6 +5,7 @@ import inputLangText from "./modules/inputLangText";
 import loadMore from "./modules/loadMore";
 import mask from "./modules/mask";
 import modal from "./modules/modal";
+import pictures from "./modules/pictures";
 import slider from "./modules/slider";
 
 let state = {};
@@ -20,3 +21,4 @@ inputLangText('[name="message"]');
 loadMore('.button-styles', '.styles .row');
 calc(state);
 filterTabs('.portfolio-menu li', '.portfolio-block');
+pictures('.sizes-block');
