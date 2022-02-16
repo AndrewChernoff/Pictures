@@ -5550,26 +5550,26 @@ var calc = function calc(store) {
   var btn = document.querySelector('.calc-button');
   btn.disabled = true;
 
+  function setParamToStore(storeParam, e) {
+    var pictureParam = e.target.options[e.target.selectedIndex].dataset.price;
+    store[storeParam] = +pictureParam;
+  }
+
   function calculate(listener, selector) {
     var param = document.querySelector(selector);
     param.addEventListener(listener, function (e) {
       if (selector === '#size') {
-        var pictureParam = e.target.options[e.target.selectedIndex].dataset.price;
-        store.sizePrice = +pictureParam;
+        setParamToStore('sizePrice', e);
       } else if (selector === '#material') {
-        var _pictureParam = e.target.options[e.target.selectedIndex].dataset.price;
-        store.materialPrice = +_pictureParam;
+        setParamToStore('materialPrice', e);
       } else if (selector === '#options') {
-        var _pictureParam2 = e.target.options[e.target.selectedIndex].dataset.price;
-        store.options = +_pictureParam2;
+        setParamToStore('options', e);
 
         if (!e.target.selectedIndex) {
           store.options = 0;
         }
       } else if (selector === 'input[name="upload"]') {
-        var _pictureParam3 = e.target.options[e.target.selectedIndex].dataset.price;
-        console.log(_pictureParam3);
-        store.image = _pictureParam3;
+        setParamToStore('image', e);
       } else if (selector === '.promocode') {
         if (promocode.value == 'IWANTPOPART' || promocode.value == 'IWANTPOPART ') {
           isCodeGot = true;

@@ -6,26 +6,26 @@ const calc = (store) => {
 
     btn.disabled = true;
 
+    function setParamToStore(storeParam, e) {
+        let pictureParam = e.target.options[e.target.selectedIndex].dataset.price;
+        store[storeParam] = +pictureParam;
+    }
+
     function calculate(listener, selector) {
         let param = document.querySelector(selector);
 
         param.addEventListener(listener, function (e) {
             if (selector === '#size') {
-                let pictureParam = e.target.options[e.target.selectedIndex].dataset.price;
-                store.sizePrice = +pictureParam;
+                setParamToStore('sizePrice', e);
             } else if (selector === '#material') {
-                let pictureParam = e.target.options[e.target.selectedIndex].dataset.price;
-                store.materialPrice = +pictureParam;
+                setParamToStore('materialPrice', e);
             } else if (selector === '#options') {
-                let pictureParam = e.target.options[e.target.selectedIndex].dataset.price;
-                store.options = +pictureParam;
+                setParamToStore('options', e);
                 if (!e.target.selectedIndex) {
                     store.options = 0;
                 }
             } else if (selector === 'input[name="upload"]') {
-                let pictureParam = e.target.options[e.target.selectedIndex].dataset.price;
-                console.log(pictureParam);
-                store.image = pictureParam;
+                setParamToStore('image', e);
             } else if (selector === '.promocode') {
                 if (promocode.value == 'IWANTPOPART' || promocode.value == 'IWANTPOPART ') {
                     isCodeGot = true;
@@ -75,6 +75,5 @@ const calc = (store) => {
     calculate('input', '.promocode');
     calculate('input', 'input[name="upload"]');
 }
-
 
 export default calc;
