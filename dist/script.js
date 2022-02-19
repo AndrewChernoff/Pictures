@@ -5454,15 +5454,17 @@ module.exports = g;
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_accordion__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/accordion */ "./src/js/modules/accordion.js");
-/* harmony import */ var _modules_calc__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/calc */ "./src/js/modules/calc.js");
-/* harmony import */ var _modules_filterTabs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/filterTabs */ "./src/js/modules/filterTabs.js");
-/* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
-/* harmony import */ var _modules_inputLangText__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/inputLangText */ "./src/js/modules/inputLangText.js");
-/* harmony import */ var _modules_loadMore__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/loadMore */ "./src/js/modules/loadMore.js");
-/* harmony import */ var _modules_mask__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/mask */ "./src/js/modules/mask.js");
-/* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/modal */ "./src/js/modules/modal.js");
-/* harmony import */ var _modules_pictures__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/pictures */ "./src/js/modules/pictures.js");
-/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
+/* harmony import */ var _modules_burger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/burger */ "./src/js/modules/burger.js");
+/* harmony import */ var _modules_calc__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/calc */ "./src/js/modules/calc.js");
+/* harmony import */ var _modules_filterTabs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/filterTabs */ "./src/js/modules/filterTabs.js");
+/* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
+/* harmony import */ var _modules_inputLangText__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/inputLangText */ "./src/js/modules/inputLangText.js");
+/* harmony import */ var _modules_loadMore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/loadMore */ "./src/js/modules/loadMore.js");
+/* harmony import */ var _modules_mask__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/mask */ "./src/js/modules/mask.js");
+/* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/modal */ "./src/js/modules/modal.js");
+/* harmony import */ var _modules_pictures__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/pictures */ "./src/js/modules/pictures.js");
+/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
+
 
 
 
@@ -5475,18 +5477,19 @@ __webpack_require__.r(__webpack_exports__);
 
 var state = {};
 console.log(state);
-Object(_modules_modal__WEBPACK_IMPORTED_MODULE_7__["default"])();
-Object(_modules_slider__WEBPACK_IMPORTED_MODULE_9__["default"])('.feedback-slider-item', 'horizontal', '.main-prev-btn', '.main-next-btn');
-Object(_modules_slider__WEBPACK_IMPORTED_MODULE_9__["default"])('.main-slider-item', 'vertical');
-Object(_modules_forms__WEBPACK_IMPORTED_MODULE_3__["default"])(state);
-Object(_modules_mask__WEBPACK_IMPORTED_MODULE_6__["default"])('[name="phone"]');
-Object(_modules_inputLangText__WEBPACK_IMPORTED_MODULE_4__["default"])('[name="name"]');
-Object(_modules_inputLangText__WEBPACK_IMPORTED_MODULE_4__["default"])('[name="message"]');
-Object(_modules_loadMore__WEBPACK_IMPORTED_MODULE_5__["default"])('.button-styles', '.styles .row');
-Object(_modules_calc__WEBPACK_IMPORTED_MODULE_1__["default"])(state);
-Object(_modules_filterTabs__WEBPACK_IMPORTED_MODULE_2__["default"])('.portfolio-menu li', '.portfolio-block');
-Object(_modules_pictures__WEBPACK_IMPORTED_MODULE_8__["default"])('.sizes-block');
+Object(_modules_modal__WEBPACK_IMPORTED_MODULE_8__["default"])();
+Object(_modules_slider__WEBPACK_IMPORTED_MODULE_10__["default"])('.feedback-slider-item', 'horizontal', '.main-prev-btn', '.main-next-btn');
+Object(_modules_slider__WEBPACK_IMPORTED_MODULE_10__["default"])('.main-slider-item', 'vertical');
+Object(_modules_forms__WEBPACK_IMPORTED_MODULE_4__["default"])(state);
+Object(_modules_mask__WEBPACK_IMPORTED_MODULE_7__["default"])('[name="phone"]');
+Object(_modules_inputLangText__WEBPACK_IMPORTED_MODULE_5__["default"])('[name="name"]');
+Object(_modules_inputLangText__WEBPACK_IMPORTED_MODULE_5__["default"])('[name="message"]');
+Object(_modules_loadMore__WEBPACK_IMPORTED_MODULE_6__["default"])('.button-styles', '.styles .row');
+Object(_modules_calc__WEBPACK_IMPORTED_MODULE_2__["default"])(state);
+Object(_modules_filterTabs__WEBPACK_IMPORTED_MODULE_3__["default"])('.portfolio-menu li', '.portfolio-block');
+Object(_modules_pictures__WEBPACK_IMPORTED_MODULE_9__["default"])('.sizes-block');
 Object(_modules_accordion__WEBPACK_IMPORTED_MODULE_0__["default"])('.accordion-heading', '.accordion-block');
+Object(_modules_burger__WEBPACK_IMPORTED_MODULE_1__["default"])('.burger', '.burger-menu');
 
 /***/ }),
 
@@ -5567,6 +5570,35 @@ var accordion = function accordion(headingSelector, blocksSelector) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (accordion);
+
+/***/ }),
+
+/***/ "./src/js/modules/burger.js":
+/*!**********************************!*\
+  !*** ./src/js/modules/burger.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var burger = function burger(triggerSelector, menuSelector) {
+  var trigger = document.querySelector(triggerSelector);
+  var menu = document.querySelector(menuSelector);
+  menu.style.display = 'none';
+  menu.classList.add('faded');
+  trigger.addEventListener('click', function () {
+    if (menu.style.display == 'none' && window.screen.width < 993) {
+      menu.style.display = 'block';
+      menu.style.transition = 'all 0.5s';
+    } else if (menu.style.display == 'block' && window.screen.width < 993) {
+      menu.style.display = 'none';
+      menu.style.transition = 'all 0.5s';
+    }
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (burger);
 
 /***/ }),
 
