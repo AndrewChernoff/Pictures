@@ -1,3 +1,4 @@
+import accordion from "./modules/accordion";
 import calc from "./modules/calc";
 import filterTabs from "./modules/filterTabs";
 import forms from "./modules/forms";
@@ -22,3 +23,4 @@ loadMore('.button-styles', '.styles .row');
 calc(state);
 filterTabs('.portfolio-menu li', '.portfolio-block');
 pictures('.sizes-block');
+accordion('.accordion-heading', '.accordion-block');

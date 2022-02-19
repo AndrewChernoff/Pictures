@@ -914,10 +914,22 @@ h4 {
   border-bottom: 2px dotted #333;
 }
 .often-questions .accordion-block {
+  display: none;
   margin-top: 1rem;
   background-color: #f7e7e6;
   padding: 3rem 4rem;
 }
+
+.often-questions .accordion-heading.active+.accordion-block {
+  display: block;
+}
+
+
+.often-questions .accordion-heading.active span {
+  border-bottom: none;
+  font-weight: bold;
+}
+
 .often-questions .accordion-block:before {
   content: '';
   position: absolute;
@@ -1736,3 +1748,12 @@ h4 {
     width: 25rem;
   }
 }
+/* added by me */
+
+.active {
+  color: #f5bcb8;
+  transition: all 0.5s;
+} 
+
+
+
