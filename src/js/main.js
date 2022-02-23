@@ -9,6 +9,7 @@ import mask from "./modules/mask";
 import modal from "./modules/modal";
 import pictures from "./modules/pictures";
 import slider from "./modules/slider";
+import scroll from "./modules/scroll";
 
 let state = {};
 console.log(state);
@@ -25,4 +26,5 @@ calc(state);
 filterTabs('.portfolio-menu li', '.portfolio-block');
 pictures('.sizes-block');
 accordion('.accordion-heading', '.accordion-block');
-burger('.burger', '.burger-menu')
+burger('.burger', '.burger-menu');
+scroll('.pageup', '.up');

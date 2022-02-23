@@ -4,7 +4,6 @@ const accordion = (headingSelector, blocksSelector) => {
 
     blocks.forEach(block => block.classList.add('animated', 'flipInX'))
     accordionHeadings.forEach(el => {
-
         el.addEventListener('click', function () {
             this.classList.toggle('active');
         });
