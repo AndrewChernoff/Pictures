@@ -5465,6 +5465,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_pictures__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/pictures */ "./src/js/modules/pictures.js");
 /* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
 /* harmony import */ var _modules_scroll__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modules/scroll */ "./src/js/modules/scroll.js");
+/* harmony import */ var _modules_dragAndDrop__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./modules/dragAndDrop */ "./src/js/modules/dragAndDrop.js");
+
 
 
 
@@ -5493,6 +5495,7 @@ Object(_modules_pictures__WEBPACK_IMPORTED_MODULE_9__["default"])('.sizes-block'
 Object(_modules_accordion__WEBPACK_IMPORTED_MODULE_0__["default"])('.accordion-heading', '.accordion-block');
 Object(_modules_burger__WEBPACK_IMPORTED_MODULE_1__["default"])('.burger', '.burger-menu');
 Object(_modules_scroll__WEBPACK_IMPORTED_MODULE_11__["default"])('.pageup', '.up');
+Object(_modules_dragAndDrop__WEBPACK_IMPORTED_MODULE_12__["default"])();
 
 /***/ }),
 
@@ -5688,6 +5691,85 @@ var calc = function calc(store) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (calc);
+
+/***/ }),
+
+/***/ "./src/js/modules/dragAndDrop.js":
+/*!***************************************!*\
+  !*** ./src/js/modules/dragAndDrop.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.slice */ "./node_modules/core-js/modules/es.array.slice.js");
+/* harmony import */ var core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.function.name */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.string.split */ "./node_modules/core-js/modules/es.string.split.js");
+/* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+
+var dragAndDrop = function dragAndDrop() {
+  var uploadInputs = document.querySelectorAll('[name = "upload"]');
+  ['dragover', 'dragleave', 'dragenter', 'drop'].forEach(function (evtName) {
+    uploadInputs.forEach(function (input) {
+      input.addEventListener(evtName, preventDefault);
+    });
+  });
+
+  function preventDefault(e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
+  function hightlight(item) {
+    item.parentElement.style.backgroundColor = '#865b59';
+    item.parentElement.style.border = '3px solid red';
+  }
+
+  function unhightlight(item) {
+    item.parentElement.style.backgroundColor = item.parentElement.parentElement.style.backgroundColor;
+    item.parentElement.style.border = 'none';
+  }
+
+  ['dragover', 'dragenter'].forEach(function (evtName) {
+    uploadInputs.forEach(function (input) {
+      input.addEventListener(evtName, function () {
+        return hightlight(input);
+      });
+    });
+  });
+  ['dragleave', 'drop'].forEach(function (evtName) {
+    uploadInputs.forEach(function (input) {
+      input.addEventListener(evtName, function () {
+        return unhightlight(input);
+      });
+    });
+  });
+  uploadInputs.forEach(function (input) {
+    input.addEventListener('drop', function (e) {
+      input.files = e.dataTransfer.files;
+      var fileName = input.files[0].name;
+      var array = fileName.split('.');
+
+      if (array[0].length > 6) {
+        array.value = array[0].slice(0, 6) + '...' + array[1];
+      }
+
+      input.previousSibling.previousSibling.textContent = array.value;
+      unhightlight(input);
+    });
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (dragAndDrop);
 
 /***/ }),
 
@@ -6147,6 +6229,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var modal = function modal() {
+  var uploadInput = document.querySelectorAll('[name="upload"]');
+
   function getScrollbarWidth() {
     var div = document.createElement('div');
     div.style.overflowY = 'scroll';
@@ -6175,9 +6259,7 @@ var modal = function modal() {
           e.preventDefault();
         }
 
-        popedUp = true; ////////////////
-        //windows.forEach(window => window.style.display = 'none');
-
+        popedUp = true;
         modalWindow.style.display = 'block';
         document.body.style.marginRight = "".concat(getScrollbarWidth(), "px");
         document.body.style.overflow = 'hidden';
@@ -6196,6 +6278,13 @@ var modal = function modal() {
           return form.reset();
         });
       }
+
+      uploadInput.forEach(function (input) {
+        ////next siblng textContent of uploaded photo in form after closing modal window  
+        if (input.previousSibling.previousSibling.textContent != 'Файл не выбран') {
+          input.previousSibling.previousSibling.textContent = 'Файл не выбран';
+        }
+      });
     });
   }
 

@@ -10,6 +10,7 @@ import modal from "./modules/modal";
 import pictures from "./modules/pictures";
 import slider from "./modules/slider";
 import scroll from "./modules/scroll";
+import dragAndDrop from "./modules/dragAndDrop";
 
 let state = {};
 console.log(state);
@@ -28,3 +29,4 @@ pictures('.sizes-block');
 accordion('.accordion-heading', '.accordion-block');
 burger('.burger', '.burger-menu');
 scroll('.pageup', '.up');
+dragAndDrop();

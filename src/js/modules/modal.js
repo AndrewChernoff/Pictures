@@ -1,4 +1,6 @@
 const modal = () => {
+    let uploadInput = document.querySelectorAll('[name="upload"]');
+
     function getScrollbarWidth() {
         let div = document.createElement('div');
 
@@ -33,9 +35,7 @@ const modal = () => {
                     e.preventDefault();
                 }
 
-                popedUp = true;////////////////
-
-                //windows.forEach(window => window.style.display = 'none');
+                popedUp = true;
 
                 modalWindow.style.display = 'block';
                 document.body.style.marginRight = `${getScrollbarWidth()}px`;
@@ -54,6 +54,12 @@ const modal = () => {
                 document.body.style.marginRight = '0px';
                 forms.forEach(form => form.reset());
             }
+
+            uploadInput.forEach(input => { ////next siblng textContent of uploaded photo in form after closing modal window  
+                if (input.previousSibling.previousSibling.textContent != 'Файл не выбран') {
+                    input.previousSibling.previousSibling.textContent = 'Файл не выбран';
+                }
+            })
         })
     }
 

@@ -1,8 +1,8 @@
 import postData from "./DAL";
 
 const forms = (store) => {
-    let form = document.querySelectorAll('form');
-    let modal = document.querySelectorAll('[data-modal]');
+    const form = document.querySelectorAll('form');
+    const modal = document.querySelectorAll('[data-modal]');
     let uploadInput = document.querySelectorAll('[name="upload"]');
 
     uploadInput.forEach(el => {
